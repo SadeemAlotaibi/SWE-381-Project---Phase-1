@@ -179,6 +179,42 @@ document.addEventListener("DOMContentLoaded", () => {
           return
         }
       }
+//----- RahAFS addition: Save faculty preferences -----
+const selectedCoursesList = document.getElementById("selectedCourses");
+const selectedItems = selectedCoursesList ? selectedCoursesList.querySelectorAll(".course-item") : [];
+const courses = [];
+
+selectedItems.forEach((li) => {
+  const text = li.textContent.trim().replace(/^\d+\s*/, ""); // يشيل رقم الترتيب لو موجود
+  courses.push(text);
+});
+
+const rankSelect = document.getElementById("academicRank");
+const rankValue = rankSelect ? rankSelect.value : "";
+
+const availabilityInput = document.querySelector('input[name="availability"]:checked');
+const availabilityValue = availabilityInput ? availabilityInput.value : "";
+
+// خريطة الرتب للعرض في الداشبورد
+const rankMap = {
+  professor: "Professor",
+  associate: "Associate Professor",
+  assistant: "Assistant Professor",
+  lecturer: "Lecturer",
+  ta: "Teaching Assistant"
+};
+
+const formData = {
+  name: localStorage.getItem("name") || "Faculty Member",
+  rank: rankMap[rankValue] || rankValue,
+  availability: availabilityValue === "available" ? "Available" :
+                availabilityValue === "partial" ? "Partially Available" :
+                "Unavailable",
+  courses: courses
+};
+
+localStorage.setItem("facultyForm", JSON.stringify(formData));
+//-----  addition ends -----
 
       alert("Preferences submitted successfully!")
       window.location.href = "faculty-dashboard.html"
