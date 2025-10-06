@@ -1,154 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Dashboard - FTSMS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Dashboard - FTSMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .badge-course{font-size:.9rem}
+  </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between py-3">
-                <div class="d-flex align-items-center gap-3">
-                   <img src="images/swe-logo.JPG" alt="SWE Logo" class="logo">
-                    <div>
-                        <h1 class="mb-0">Faculty Dashboard</h1>
-                        <p class="mb-0 text-muted">King Saud University - Department of Software Engineering</p>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="user-name">Dr. Ahmed Al-Saud</span>
-                    <button onclick="logout()" class="btn btn-outline-secondary">Logout</button>
-                </div>
-            </div>
-        </div>
-    </header>
+  <!-- Header (framework) -->
+  <header class="site-header">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between py-3">
+        <div class="d-flex align-items-center gap-3">
+          <img src="images/swe-logo.JPG" alt="SWE Logo" class="logo">
+          <div>
+            <h1 class="mb-0">Faculty Dashboard</h1>
+            <p class="mb-0 text-muted">King Saud University - Department of Software Engineering</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="user-name">Dr. Ahmed Al-Saud</span>
+          <button onclick="logout()" class="btn btn-outline-secondary">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <main class="container my-4">
-        <div class="row mb-4">
-            <div class="col-12">
-                <h2 class="mb-4">Welcome, Dr. Ahmed Al-Saud</h2>
-            </div>
-        </div>
+  <main class="container my-4">
+    <!-- Welcome -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h2 id="welcomeTitle" class="mb-4">Welcome, Dr. Ahmed Al-Saud</h2>
+      </div>
+    </div>
 
-        <div class="row g-4 mb-4">
-            <div class="col-md-4">
-                <div class="stat-card p-4">
-                    <h3 class="h6 text-muted mb-2">Current Semester</h3>
-                    <p class="h4 mb-0">Spring 2025</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card p-4">
-                    <h3 class="h6 text-muted mb-2">Current Teaching Load</h3>
-                    <p class="h4 mb-0">12 Hours</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card p-4">
-                    <h3 class="h6 text-muted mb-2">Academic Rank</h3>
-                    <p class="h4 mb-0">Associate Professor</p>
-                </div>
-            </div>
-        </div>
+    <!-- Top stats -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="stat-card p-4">
+          <h3 class="h6 text-muted mb-2">Current Semester</h3>
+          <p id="currentSemesterVal" class="h4 mb-0">Spring 2025</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card p-4">
+          <h3 class="h6 text-muted mb-2">Current Teaching Load</h3>
+          <p id="currentLoadVal" class="h4 mb-0">12 Hours</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card p-4">
+          <h3 class="h6 text-muted mb-2">Academic Rank</h3>
+          <p id="rankVal" class="h4 mb-0">Associate Professor</p>
+        </div>
+      </div>
+    </div>
 
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="content-card p-4">
-                    <h3 class="h5 mb-3">Upcoming Semesters</h3>
-                    <div class="list-group">
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="h6 mb-1">Fall 2025</h4>
-                                <p class="mb-0 small text-muted">Preference submission open</p>
-                            </div>
-                            <a href="faculty-preferences.html?semester=fall2025" class="btn btn-primary btn-sm">Submit Preferences</a>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="h6 mb-1">Spring 2026</h4>
-                                <p class="mb-0 small text-muted">Opens in 3 months</p>
-                            </div>
-                            <button class="btn btn-secondary btn-sm" disabled>Not Available</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Submission summary (dynamic) -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="content-card p-4">
+          <h3 class="h5 mb-3">Your Latest Submission</h3>
+          <div class="row gy-2">
+            <div class="col-md-4"><b>Rank:</b> <span id="sumRank">—</span></div>
+            <div class="col-md-4"><b>Availability:</b> <span id="sumAvail">—</span></div>
+            <div class="col-md-4"><b>Preferences Count:</b> <span id="sumCount">0</span></div>
+          </div>
+          <div class="mt-3">
+            <b>Preferences (ordered):</b>
+            <div id="prefBadges" class="d-flex flex-wrap gap-2 mt-2"></div>
+          </div>
+          <div class="alert alert-info mt-3 mb-0" id="noDataNote" style="display:none;">
+            No submission found. Please <a href="faculty-preferences.html">submit your preferences</a>.
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <div class="col-md-6">
-                <div class="content-card p-4">
-                    <h3 class="h5 mb-3">Current Teaching Schedule</h3>
-                    <div class="table-responsive">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Course</th>
-                                    <th>Section</th>
-                                    <th>Hours</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SWE 381</td>
-                                    <td>Section 1 (Lecture)</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>SWE 381</td>
-                                    <td>Section 1 (Tutorial)</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>SWE 321</td>
-                                    <td>Section 2 (Lecture)</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>SWE 321</td>
-                                    <td>Section 2 (Tutorial)</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>SWE 434</td>
-                                    <td>Section 1 (Lecture)</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>SWE 434</td>
-                                    <td>Section 1 (Tutorial)</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="text-end"><strong>Total:</strong></td>
-                                    <td><strong>12</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+    <!-- Two columns -->
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="content-card p-4">
+          <h3 class="h5 mb-3">Upcoming Semesters</h3>
+          <div class="list-group">
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="h6 mb-1">Fall 2025</h4>
+                <p class="mb-0 small text-muted">Preference submission open</p>
+              </div>
+              <a href="faculty-preferences.html?semester=fall2025" class="btn btn-primary btn-sm">Submit Preferences</a>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="h6 mb-1">Spring 2026</h4>
+                <p class="mb-0 small text-muted">Opens in 3 months</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" disabled>Not Available</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 King Saud University. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="mailto:contact@ksu.edu.sa" class="text-decoration-none">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+      <div class="col-md-6">
+        <div class="content-card p-4">
+          <h3 class="h5 mb-3">Current Teaching Schedule</h3>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Section</th>
+                  <th>Hours</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>SWE 381</td><td>Section 1 (Lecture)</td><td>3</td></tr>
+                <tr><td>SWE 381</td><td>Section 1 (Tutorial)</td><td>1</td></tr>
+                <tr><td>SWE 321</td><td>Section 2 (Lecture)</td><td>3</td></tr>
+                <tr><td>SWE 321</td><td>Section 2 (Tutorial)</td><td>1</td></tr>
+                <tr><td>SWE 434</td><td>Section 1 (Lecture)</td><td>3</td></tr>
+                <tr><td>SWE 434</td><td>Section 1 (Tutorial)</td><td>1</td></tr>
+                <tr>
+                  <td colspan="2" class="text-end"><strong>Total:</strong></td>
+                  <td><strong>12</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-    <script>
-        checkAuth('faculty');
-    </script>
+  <!-- Footer (framework) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-0">&copy; 2025 King Saud University. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="mailto:contact@ksu.edu.sa" class="text-decoration-none">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // framework auth
+    checkAuth('faculty');
+  </script>
+
+  <!-- Dynamic binding to saved preferences -->
+  <script>
+  (function(){
+    const saved = JSON.parse(localStorage.getItem('facultyForm') || '{}');
+    const hasData = Object.keys(saved).length > 0;
+
+    // Helpers
+    const maxByRank = {Professor:10,"Associate Professor":12,"Assistant Professor":14,Lecturer:16,"Teaching Assistant":16};
+    const setText = (sel, val) => { const el = document.querySelector(sel); if(el) el.textContent = val; };
+
+    if(!hasData){
+      // show note to submit
+      const note = document.getElementById('noDataNote');
+      if(note) note.style.display = 'block';
+      return; // keep framework placeholders
+    }
+
+    // Header name + welcome
+    setText('.user-name', saved.name || 'Faculty');
+    setText('#welcomeTitle', `Welcome, ${saved.name ? 'Dr. ' + saved.name : 'Faculty'}`);
+
+    // Rank + load
+    setText('#rankVal', saved.rank || '—');
+    const max = maxByRank[saved.rank] ?? null;
+    let loadText = '—';
+    if(max !== null){
+      if(saved.availability === 'Unavailable')      loadText = '0 Hours';
+      else if(saved.availability === 'Partially Available') loadText = Math.floor(max/2) + ' Hours';
+      else                                           loadText = max + ' Hours';
+    }
+    setText('#currentLoadVal', loadText);
+
+    // Summary box
+    setText('#sumRank', saved.rank || '—');
+    setText('#sumAvail', saved.availability || '—');
+    setText('#sumCount', Array.isArray(saved.courses) ? saved.courses.length : 0);
+
+    const wrap = document.getElementById('prefBadges');
+    if(wrap){
+      wrap.innerHTML = '';
+      (saved.courses || []).forEach((c,i)=>{
+        const span = document.createElement('span');
+        span.className = 'badge text-bg-secondary badge-course';
+        span.textContent = `${i+1}. ${c}`;
+        wrap.appendChild(span);
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
