@@ -49,8 +49,6 @@ main {
   background-color: var(--neutral-white);
   border-radius: 8px;
   padding: 8px;
-
-  object-fit: contain;
 }
 
 .user-name {
