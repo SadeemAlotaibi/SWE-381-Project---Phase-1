@@ -6,13 +6,27 @@
     <title>Admin Dashboard - FTSMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS مخصص للبطاقات، سيتم نقله إلى styles.css لاحقاً لمتطلبات التسليم */
+        .admin-card-link {
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block; /* لجعل مساحة الرابط كاملة */
+            border-radius: .5rem;
+            border: 1px solid #dee2e6;
+            background-color: #fff;
+        }
+        .admin-card-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+    </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between py-3">
+    <header class="ِAdmin DashBoard">
+        <div class="c1">
+            <div class="d-flex align-items-center justify-content-between py-2">
                 <div class="d-flex align-items-center gap-3">
-                   <img src="images/swe-logo.JPG" alt="SWE Logo" class="logo">
+                   <img src="images/swe-logo.JPG" alt="SWE Logo" class="logo" height="40">
                     <div>
                         <h1 class="mb-0">Administrator Dashboard</h1>
                         <p class="mb-0 text-muted">King Saud University - Department of Software Engineering</p>
@@ -30,39 +44,40 @@
         <div class="row mb-4">
             <div class="col-12">
                 <h2 class="mb-4">Welcome, Administrator</h2>
+                <p class="text-muted">Overview of current Teaching schedule Mangement Taskes.</p>
             </div>
         </div>
 
         <div class="row g-4 mb-4">
             <div class="col-md-3">
-                <div class="stat-card p-4">
+                <div class="card p-3 shadow-sm bg-primary text-white">
                     <h3 class="h6 text-muted mb-2">Active Load Requests</h3>
-                    <p class="h4 mb-0">2</p>
+                    <p class="h4 mb-0 fw-bold">2</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card p-4">
+                <div class="card p-3 shadow-sm bg-info text-white">
                     <h3 class="h6 text-muted mb-2">Faculty Submissions</h3>
-                    <p class="h4 mb-0">18/25</p>
+                    <p class="h2 mb-0 fw-bold">18/25</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card p-4">
+                <div class="card p-3 shadow-sm bg-danger text-white">
                     <h3 class="h6 text-muted mb-2">Courses to Assign</h3>
-                    <p class="h4 mb-0">42</p>
+                    <p class="h2 mb-0 fw-bold">42</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="stat-card p-4">
                     <h3 class="h6 text-muted mb-2">Detected Conflicts</h3>
-                    <p class="h4 mb-0 text-danger">3</p>
+                    <p class="h2 mb-0 fw-bold">3</p>
                 </div>
             </div>
         </div>
 
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
-                <a href="admin-load-requests.html" class="text-decoration-none">
+                 <a href="admin-load-requests.html" class="text-decoration-none admin-card-link p-4 shadow-sm">
                     <div class="admin-card p-4">
                         <h3 class="h5 mb-2">Manage Load Requests</h3>
                         <p class="text-muted mb-0">Create and manage semester load requests</p>
@@ -70,7 +85,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="admin-upload-schedule.html" class="text-decoration-none">
+                <a href="admin-upload-schedule.html" class="text-decoration-none admin-card-link p-4 shadow-sm">
                     <div class="admin-card p-4">
                         <h3 class="h5 mb-2">Upload Course Schedule</h3>
                         <p class="text-muted mb-0">Upload Excel files with course schedules</p>
@@ -78,15 +93,15 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="admin-courses.html" class="text-decoration-none">
+                <a href="admin-courses.html" class="text-decoration-none admin-card-link p-4 shadow-sm">
                     <div class="admin-card p-4">
-                        <h3 class="h5 mb-2">Manage Course List</h3>
+                        <h3 class="h5 mb-2 text-primary">Manage Course List</h3>
                         <p class="text-muted mb-0">Add, edit, or remove courses</p>
                     </div>
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="admin-faculty-requests.html" class="text-decoration-none">
+                <a href="admin-faculty-requests.html" class="text-decoration-none admin-card-link p-4 shadow-sm">
                     <div class="admin-card p-4">
                         <h3 class="h5 mb-2">Faculty Requests</h3>
                         <p class="text-muted mb-0">View and manage faculty submissions</p>
@@ -94,7 +109,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="admin-assignments.html" class="text-decoration-none">
+                <a href="admin-assignments.html" class="text-decoration-none admin-card-link p-4 shadow-sm">
                     <div class="admin-card p-4">
                         <h3 class="h5 mb-2">Course Assignments</h3>
                         <p class="text-muted mb-0">Assign courses to faculty members</p>
@@ -102,7 +117,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="admin-conflicts.html" class="text-decoration-none">
+                 <a href="admin-conflicts.html" class="text-decoration-none admin-card-link p-4 shadow-sm">
                     <div class="admin-card p-4">
                         <h3 class="h5 mb-2">Conflict Detection</h3>
                         <p class="text-muted mb-0">View and resolve scheduling conflicts</p>
@@ -120,7 +135,7 @@
         </div>
     </main>
 
-    <footer class="site-footer">
+     <footer class="mt-5 py-4 bg-light border-top site-footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
