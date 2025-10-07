@@ -20,7 +20,14 @@ const users = {
     name: "System Administrator",
   },
 }
-
+// خريطة الرتب الأكاديمية للعرض في الداشبورد
+const rankMap = {
+    professor: "Prof",
+    associate: "AssoP",
+    assistant: "AssisPد",
+    lecturer: "lect",
+    ta: "ta",
+};
 // Check authentication on protected pages
 function checkAuth(requiredType) {
   const loggedIn = localStorage.getItem("loggedIn")
