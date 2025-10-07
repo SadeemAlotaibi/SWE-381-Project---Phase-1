@@ -20,14 +20,7 @@ const users = {
     name: "System Administrator",
   },
 }
-// خريطة الرتب الأكاديمية للعرض في الداشبورد
-const rankMap = {
-    professor: "Prof",
-    associate: "AssoP",
-    assistant: "AssisPد",
-    lecturer: "lect",
-    ta: "ta",
-};
+
 // Check authentication on protected pages
 function checkAuth(requiredType) {
   const loggedIn = localStorage.getItem("loggedIn")
@@ -202,14 +195,14 @@ const rankValue = rankSelect ? rankSelect.value : "";
 const availabilityInput = document.querySelector('input[name="availability"]:checked');
 const availabilityValue = availabilityInput ? availabilityInput.value : "";
 
-// خريطة الرتب للعرض في الداشبورد
-const rankMap = {
-  professor: "Professor",
-  associate: "Associate Professor",
-  assistant: "Assistant Professor",
-  lecturer: "Lecturer",
-  ta: "Teaching Assistant"
-};
+ // Rank map for display in the dashboard
+            const rankMap = {
+                professor: "Professor",
+                associate: "Associate Professor",
+                assistant: "Assistant Professor",
+                lecturer: "Lecturer",
+                ta: "Teaching Assistant"
+            };
 
 const formData = {
   name: localStorage.getItem("name") || "Faculty Member",
